@@ -1,0 +1,77 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+* {
+   
+  font-family: 'Poppins', sans-serif;
+  }
+
+
+
+/* Ensure full height layout */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Main app container must be full height with flex layout */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content should expand */
+main.flex-grow {
+  flex: 1;
+}
+
+
+/*  Swiper arrow base */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ED8336 !important;
+  font-size: 20px;
+  width: 32px;
+  height: 32px;
+  transition: transform 0.3s ease;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  transform: scale(1.2);
+  color: #ED8336 !important;
+}
+
+/*  Arrow icon actual size */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 20px !important;
+}
+
+/* Pagination dot style */
+.swiper-pagination-bullet {
+  background: #d1f5e6;
+  opacity: 1;
+  transition: transform 0.2s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background: #ED8336 !important;
+  transform: scale(1.4);
+}
+
+/* Responsive Mobile Fix */
+@media (max-width: 640px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 22px;
+    height: 22px;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 14px !important;
+  }
+}
