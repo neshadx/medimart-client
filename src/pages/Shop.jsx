@@ -4,12 +4,12 @@
 // import { useQuery } from "@tanstack/react-query";
 // import { Helmet } from "react-helmet-async";
 // import { toast } from "react-toastify";
-// import { useCart } from "../Context/CartContext"; // ✅ Cart context import
+// import { useCart } from "../Context/CartContext";
 
 // const Shop = () => {
 //   const baseURL = import.meta.env.VITE_API_URL;
 //   const [selectedMedicine, setSelectedMedicine] = useState(null);
-//   const { addToCart } = useCart(); // ✅ useCart hook
+//   const { addToCart } = useCart();
 
 //   const { data: medicines = [], isLoading } = useQuery({
 //     queryKey: ["allMedicines"],
@@ -19,13 +19,12 @@
 //     },
 //   });
 
-//   // ✅ Fixed handleSelect for proper cart data
 //   const handleSelect = (med) => {
 //     addToCart({
 //       _id: med._id,
 //       name: med.name,
 //       company: med.company || "Unknown",
-//       price: med.discountedPrice || med.originalPrice || 0, // ✅ Prevents NaN
+//       price: med.discountedPrice || med.originalPrice || 0,
 //       image: med.image || "",
 //       quantity: 1,
 //     });
@@ -108,59 +107,58 @@
 //         </div>
 //       )}
 
-//      {/* ✅ Medicine Info Modal */}
-// {selectedMedicine && (
-//   <dialog id="shopModal" className="modal modal-open">
-//     <div className="modal-box bg-white text-gray-800 rounded-lg shadow-lg">
-//       <h3 className="text-2xl font-bold text-green-700 mb-4">
-//         {selectedMedicine.name}
-//       </h3>
+//       {/* ✅ Modal Section */}
+//       {selectedMedicine && (
+//         <dialog id="shopModal" className="modal modal-open">
+//           <div className="modal-box bg-white text-gray-800 rounded-lg shadow-lg">
+//             <h3 className="text-2xl font-bold text-green-700 mb-4">
+//               {selectedMedicine.name}
+//             </h3>
 
-//       <div className="flex flex-col items-center justify-center mb-4">
-//         <img
-//           src={selectedMedicine.image}
-//           alt={selectedMedicine.name}
-//           className="w-32 h-32 object-cover rounded border"
-//         />
-//       </div>
+//             <div className="flex flex-col items-center justify-center mb-4">
+//               <img
+//                 src={selectedMedicine.image}
+//                 alt={selectedMedicine.name}
+//                 className="w-32 h-32 object-cover rounded border"
+//               />
+//             </div>
 
-//       <div className="space-y-2 text-left text-sm">
-//         <p>
-//           <span className="font-semibold">💲 Price:</span>{" "}
-//           ${selectedMedicine.discountedPrice || selectedMedicine.originalPrice}
-//         </p>
-//         <p>
-//           <span className="font-semibold">⭐ Rating:</span>{" "}
-//           {selectedMedicine.rating || "N/A"}
-//         </p>
-//         <p>
-//           <span className="font-semibold">📦 Stock:</span>{" "}
-//           {selectedMedicine.stock || "N/A"}
-//         </p>
-//         <p>
-//           <span className="font-semibold">🏪 Seller:</span>{" "}
-//           {selectedMedicine.seller || "N/A"}
-//         </p>
-//       </div>
+//             <div className="space-y-2 text-left text-sm">
+//               <p>
+//                 <span className="font-semibold">💲 Price:</span>{" "}
+//                 ${selectedMedicine.discountedPrice || selectedMedicine.originalPrice}
+//               </p>
+//               <p>
+//                 <span className="font-semibold">⭐ Rating:</span>{" "}
+//                 {selectedMedicine.rating || "N/A"}
+//               </p>
+//               <p>
+//                 <span className="font-semibold">📦 Stock:</span>{" "}
+//                 {selectedMedicine.stock || "N/A"}
+//               </p>
+//               <p>
+//                 <span className="font-semibold">🏪 Seller:</span>{" "}
+//                 {selectedMedicine.seller || "N/A"}
+//               </p>
+//             </div>
 
-//       <div className="modal-action mt-6">
-//         <button
-//           onClick={() => setSelectedMedicine(null)}
-//           className="btn btn-sm bg-red-500 hover:bg-red-600 text-white"
-//         >
-//           Close
-//         </button>
-//       </div>
-//     </div>
-//   </dialog>
-// )}
-
-     
+//             <div className="modal-action mt-6">
+//               <button
+//                 onClick={() => setSelectedMedicine(null)}
+//                 className="btn btn-sm bg-red-500 hover:bg-red-600 text-white"
+//               >
+//                 Close
+//               </button>
+//             </div>
+//           </div>
+//         </dialog>
+//       )}
 //     </section>
 //   );
 // };
 
 // export default Shop;
+
 
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
@@ -182,15 +180,16 @@ const Shop = () => {
   });
 
   const handleSelect = (med) => {
-    addToCart({
+    const item = {
       _id: med._id,
       name: med.name,
-      company: med.company || "Unknown",
+      company: med.seller || med.company || "Unknown", // ✅ Corrected company field
       price: med.discountedPrice || med.originalPrice || 0,
       image: med.image || "",
       quantity: 1,
-    });
+    };
 
+    addToCart(item);
     toast.success(`${med.name} added to cart!`);
   };
 
@@ -320,6 +319,4 @@ const Shop = () => {
 };
 
 export default Shop;
-
-
 
