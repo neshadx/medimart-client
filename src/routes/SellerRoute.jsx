@@ -1,22 +1,18 @@
 import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../Context/Provider/AuthProvider";
-import useRole from "../hooks/useRole";
-import Loading from "../Components/Loading";
+import useRole from "../hooks/useRole"; // Must return: ["seller", loading]
 
 const SellerRoute = ({ children }) => {
   const { user, loading } = useContext(AuthContext);
-  const [role, isRoleLoading] = useRole();
+  const [role, roleLoading] = useRole();
+  const location = useLocation();
 
-  if (loading || isRoleLoading) {
-    return <Loading />;
-  }
+  if (loading || roleLoading) return <div className="text-center mt-20">Loading...</div>;
 
-  if (user && role === "seller") {
-    return children;
-  }
+  if (user && role === "seller") return children;
 
-  return <Navigate to="/" replace />;
+  return <Navigate to="/unauthorized" state={{ from: location }} replace />;
 };
 
 export default SellerRoute;
