@@ -312,7 +312,6 @@
 
 
 
-
 // 🟢 Main routing setup for MediMart
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -363,6 +362,9 @@ import AskForAdvertise from "./pages/Dashboard/Seller/AskForAdvertise";
 import UserHome from "./pages/Dashboard/User/UserHome";
 import UserPaymentHistory from "./pages/Dashboard/User/UserPaymentHistory";
 
+// ✅ Dashboard Redirect Page
+import DashboardRedirect from "./pages/Dashboard/DashboardRedirect";
+
 const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
@@ -411,6 +413,16 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // ✅ Dynamic redirect based on role
+      {
+        index: true,
+        element: (
+          <PrivateRoute>
+            <DashboardRedirect />
+          </PrivateRoute>
+        ),
+      },
+
       // ✅ Admin Routes
       {
         path: "admin-home",

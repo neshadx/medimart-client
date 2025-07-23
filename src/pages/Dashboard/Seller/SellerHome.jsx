@@ -32,22 +32,22 @@ const SellerHome = () => {
       </Helmet>
 
       <h2 className="text-3xl font-bold text-green-700 text-center mb-8">
-        Welcome, Seller!
+        Welcome, Seller! 🧾
       </h2>
 
       {isLoading ? (
         <p className="text-center text-gray-500">Loading your earnings...</p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white border shadow-md rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-600">Paid Sales</h3>
+          <div className="bg-white border border-green-100 shadow-md rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-gray-600">Total Paid Sales</h3>
             <p className="text-2xl font-bold text-green-600 mt-2">
               ৳ {paidTotal.toFixed(2)}
             </p>
           </div>
 
-          <div className="bg-white border shadow-md rounded-lg p-6">
-            <h3 className="text-lg font-semibold text-gray-600">Pending Sales</h3>
+          <div className="bg-white border border-yellow-100 shadow-md rounded-lg p-6">
+            <h3 className="text-lg font-semibold text-gray-600">Total Pending Sales</h3>
             <p className="text-2xl font-bold text-yellow-500 mt-2">
               ৳ {pendingTotal.toFixed(2)}
             </p>

@@ -121,6 +121,309 @@
 // export default AuthProvider;
 
 
+// import React, { createContext, useEffect, useState } from "react";
+// import app from "../firebase/firebase.config";
+// import {
+//   createUserWithEmailAndPassword,
+//   getAuth,
+//   GoogleAuthProvider,
+//   onAuthStateChanged,
+//   signInWithEmailAndPassword,
+//   signInWithPopup,
+//   signOut,
+//   updateProfile,
+// } from "firebase/auth";
+// import axios from "axios";
+
+// export const AuthContext = createContext();
+// const auth = getAuth(app);
+
+// const AuthProvider = ({ children }) => {
+//   const [user, setUser] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const googleProvider = new GoogleAuthProvider();
+
+//   const createUser = (email, password) => {
+//     setLoading(true);
+//     return createUserWithEmailAndPassword(auth, email, password);
+//   };
+
+//   const loginUser = (email, password) => {
+//     setLoading(true);
+//     return signInWithEmailAndPassword(auth, email, password).then(async (result) => {
+//       const userPayload = {
+//         email: result.user.email,
+//         name: result.user.displayName,
+//         photoURL: result.user.photoURL,
+//       };
+
+//       setUser(result.user);
+
+//       await axios.post(
+//         `${import.meta.env.VITE_API_URL}/api/auth/login`,
+//         userPayload,
+//         {
+//           withCredentials: true, // ✅ sends JWT cookie
+//         }
+//       );
+
+//       return result;
+//     });
+//   };
+
+//   const createUserWithLoginGoogle = () => {
+//     setLoading(true);
+//     return signInWithPopup(auth, googleProvider).then(async (result) => {
+//       const userPayload = {
+//         email: result.user.email,
+//         name: result.user.displayName,
+//         photoURL: result.user.photoURL,
+//       };
+
+//       setUser(result.user);
+
+//       await axios.post(
+//         `${import.meta.env.VITE_API_URL}/api/auth/login`,
+//         userPayload,
+//         {
+//           withCredentials: true,
+//         }
+//       );
+//     });
+//   };
+
+//   const profile = (updateData) => {
+//     return updateProfile(auth.currentUser, updateData);
+//   };
+
+//   const logout = () => {
+//     setLoading(true);
+//     return signOut(auth).then(() => {
+//       setUser(null);
+//       localStorage.removeItem("token");
+
+//       axios.post(
+//         `${import.meta.env.VITE_API_URL}/api/auth/logout`,
+//         {},
+//         { withCredentials: true }
+//       );
+//     });
+//   };
+
+//   useEffect(() => {
+//     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+//       setUser(currentUser);
+//       setLoading(false);
+
+//       if (currentUser) {
+//         const token = await currentUser.getIdToken();
+//         localStorage.setItem("token", token);
+//       } else {
+//         localStorage.removeItem("token");
+//       }
+//     });
+
+//     return () => unsubscribe();
+//   }, []);
+
+//   const authData = {
+//     user,
+//     loading,
+//     createUser,
+//     loginUser,
+//     logout,
+//     profile,
+//     createUserWithLoginGoogle,
+//     setUser,
+//     setLoading,
+//   };
+
+//   return (
+//     <AuthContext.Provider value={authData}>{children}</AuthContext.Provider>
+//   );
+// };
+
+// export default AuthProvider;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React, { createContext, useEffect, useState } from "react";
+// import app from "../firebase/firebase.config";
+// import {
+//   createUserWithEmailAndPassword,
+//   getAuth,
+//   GoogleAuthProvider,
+//   onAuthStateChanged,
+//   signInWithEmailAndPassword,
+//   signInWithPopup,
+//   signOut,
+//   updateProfile,
+// } from "firebase/auth";
+// import axios from "axios";
+
+// export const AuthContext = createContext();
+// const auth = getAuth(app);
+
+// const AuthProvider = ({ children }) => {
+//   const [user, setUser] = useState(null);
+//   const [loading, setLoading] = useState(true);
+//   const googleProvider = new GoogleAuthProvider();
+
+//   const createUser = (email, password) => {
+//     setLoading(true);
+//     return createUserWithEmailAndPassword(auth, email, password);
+//   };
+
+//   const loginUser = (email, password) => {
+//     setLoading(true);
+//     return signInWithEmailAndPassword(auth, email, password).then(async (result) => {
+//       const userPayload = {
+//         email: result.user.email,
+//         name: result.user.displayName,
+//         photoURL: result.user.photoURL,
+//       };
+
+//       setUser(result.user);
+
+//       await axios.post(
+//         `${import.meta.env.VITE_API_URL}/api/auth/login`,
+//         userPayload,
+//         {
+//           withCredentials: true, // ✅ JWT cookie-based login if used
+//         }
+//       );
+
+//       return result;
+//     });
+//   };
+
+//   const createUserWithLoginGoogle = () => {
+//     setLoading(true);
+//     return signInWithPopup(auth, googleProvider).then(async (result) => {
+//       const userPayload = {
+//         email: result.user.email,
+//         name: result.user.displayName,
+//         photoURL: result.user.photoURL,
+//       };
+
+//       setUser(result.user);
+
+//       await axios.post(
+//         `${import.meta.env.VITE_API_URL}/api/auth/login`,
+//         userPayload,
+//         {
+//           withCredentials: true,
+//         }
+//       );
+//     });
+//   };
+
+//   const profile = (updateData) => {
+//     return updateProfile(auth.currentUser, updateData);
+//   };
+
+//   const logout = () => {
+//     setLoading(true);
+//     return signOut(auth).then(() => {
+//       setUser(null);
+//       localStorage.removeItem("access-token"); // ✅ fixed token key name
+
+//       axios.post(
+//         `${import.meta.env.VITE_API_URL}/api/auth/logout`,
+//         {},
+//         { withCredentials: true }
+//       );
+//     });
+//   };
+
+//   useEffect(() => {
+//     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
+//       setUser(currentUser);
+//       setLoading(false);
+
+//       if (currentUser) {
+//         const token = await currentUser.getIdToken();
+//         localStorage.setItem("access-token", token); // ✅ FIXED: must match useRole
+//       } else {
+//         localStorage.removeItem("access-token");
+//       }
+//     });
+
+//     return () => unsubscribe();
+//   }, []);
+
+//   const authData = {
+//     user,
+//     loading,
+//     createUser,
+//     loginUser,
+//     logout,
+//     profile,
+//     createUserWithLoginGoogle,
+//     setUser,
+//     setLoading,
+//   };
+
+//   return (
+//     <AuthContext.Provider value={authData}>
+//       {children}
+//     </AuthContext.Provider>
+//   );
+// };
+
+// export default AuthProvider;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import React, { createContext, useEffect, useState } from "react";
 import app from "../firebase/firebase.config";
 import {
@@ -133,7 +436,6 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import axios from "axios";
 
 export const AuthContext = createContext();
 const auth = getAuth(app);
@@ -150,46 +452,12 @@ const AuthProvider = ({ children }) => {
 
   const loginUser = (email, password) => {
     setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password).then(async (result) => {
-      const userPayload = {
-        email: result.user.email,
-        name: result.user.displayName,
-        photoURL: result.user.photoURL,
-      };
-
-      setUser(result.user);
-
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/auth/login`,
-        userPayload,
-        {
-          withCredentials: true, // ✅ sends JWT cookie
-        }
-      );
-
-      return result;
-    });
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   const createUserWithLoginGoogle = () => {
     setLoading(true);
-    return signInWithPopup(auth, googleProvider).then(async (result) => {
-      const userPayload = {
-        email: result.user.email,
-        name: result.user.displayName,
-        photoURL: result.user.photoURL,
-      };
-
-      setUser(result.user);
-
-      await axios.post(
-        `${import.meta.env.VITE_API_URL}/api/auth/login`,
-        userPayload,
-        {
-          withCredentials: true,
-        }
-      );
-    });
+    return signInWithPopup(auth, googleProvider);
   };
 
   const profile = (updateData) => {
@@ -198,29 +466,23 @@ const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setLoading(true);
+    localStorage.removeItem("access-token");
     return signOut(auth).then(() => {
       setUser(null);
-      localStorage.removeItem("token");
-
-      axios.post(
-        `${import.meta.env.VITE_API_URL}/api/auth/logout`,
-        {},
-        { withCredentials: true }
-      );
     });
   };
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-      setLoading(false);
-
       if (currentUser) {
         const token = await currentUser.getIdToken();
-        localStorage.setItem("token", token);
+        localStorage.setItem("access-token", token);
+        setUser(currentUser);
       } else {
-        localStorage.removeItem("token");
+        setUser(null);
+        localStorage.removeItem("access-token");
       }
+      setLoading(false);
     });
 
     return () => unsubscribe();
@@ -239,9 +501,10 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={authData}>{children}</AuthContext.Provider>
+    <AuthContext.Provider value={authData}>
+      {children}
+    </AuthContext.Provider>
   );
 };
 
 export default AuthProvider;
-

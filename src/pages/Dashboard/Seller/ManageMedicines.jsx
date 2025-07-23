@@ -11,6 +11,7 @@ const ManageMedicines = () => {
   const queryClient = useQueryClient();
   const { user } = useAuth();
   const [editItem, setEditItem] = useState(null);
+  const [search, setSearch] = useState("");
 
   const {
     register,
@@ -30,13 +31,30 @@ const ManageMedicines = () => {
     },
   });
 
-  // Mutation to add or update medicine
+  // Get dynamic dropdown options (categories and companies)
+  const { data: categories = [] } = useQuery({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/categories");
+      return res.data;
+    },
+  });
+
+  const { data: companies = [] } = useQuery({
+    queryKey: ["companies"],
+    queryFn: async () => {
+      const res = await axiosSecure.get("/companies");
+      return res.data;
+    },
+  });
+
+  // Mutation for Add / Update
   const mutation = useMutation({
     mutationFn: async (data) => {
       if (editItem) {
         return await axiosSecure.put(`/medicines/${editItem._id}`, data);
       } else {
-        return await axiosSecure.post("/medicines", data);
+        return await axiosSecure.post("/medicines", { ...data, seller: user.email });
       }
     },
     onSuccess: () => {
@@ -51,7 +69,7 @@ const ManageMedicines = () => {
     },
   });
 
-  // Delete medicine
+  // Delete
   const handleDelete = async (id) => {
     if (!confirm("Are you sure to delete this medicine?")) return;
     try {
@@ -63,7 +81,7 @@ const ManageMedicines = () => {
     }
   };
 
-  // Edit medicine
+  // Edit
   const handleEdit = (item) => {
     setEditItem(item);
     setValue("name", item.name);
@@ -78,30 +96,44 @@ const ManageMedicines = () => {
     document.getElementById("medicineModal").showModal();
   };
 
+  // Filtered & Sorted data
+  const filtered = medicines
+    .filter((m) => m.name.toLowerCase().includes(search.toLowerCase()))
+    .sort((a, b) => a.price - b.price); // sort by price ascending
+
   return (
     <section className="max-w-7xl mx-auto px-4 py-10">
       <Helmet>
         <title>Manage Medicines | Seller | MediMart</title>
       </Helmet>
 
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex justify-between flex-wrap items-center mb-6 gap-4">
         <h2 className="text-3xl font-bold text-green-700">Manage Medicines</h2>
-        <button
-          className="btn btn-sm bg-green-600 text-white"
-          onClick={() => {
-            setEditItem(null);
-            reset();
-            document.getElementById("medicineModal").showModal();
-          }}
-        >
-          + Add Medicine
-        </button>
+        <div className="flex gap-3">
+          <input
+            type="text"
+            placeholder="Search by name..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="input input-bordered"
+          />
+          <button
+            className="btn bg-green-600 text-white"
+            onClick={() => {
+              setEditItem(null);
+              reset();
+              document.getElementById("medicineModal").showModal();
+            }}
+          >
+            + Add Medicine
+          </button>
+        </div>
       </div>
 
       {isLoading ? (
         <p className="text-center text-gray-500">Loading your medicines...</p>
-      ) : medicines.length === 0 ? (
-        <p className="text-center text-gray-400">No medicines listed yet.</p>
+      ) : filtered.length === 0 ? (
+        <p className="text-center text-gray-400">No medicines found.</p>
       ) : (
         <div className="overflow-x-auto">
           <table className="table w-full">
@@ -119,7 +151,7 @@ const ManageMedicines = () => {
               </tr>
             </thead>
             <tbody>
-              {medicines.map((m, i) => (
+              {filtered.map((m, i) => (
                 <tr key={m._id}>
                   <td>{i + 1}</td>
                   <td>
@@ -153,11 +185,24 @@ const ManageMedicines = () => {
             <input {...register("generic", { required: true })} placeholder="Generic Name" className="input input-bordered" />
             <textarea {...register("description", { required: true })} placeholder="Short Description" className="textarea textarea-bordered" />
             <input {...register("image", { required: true })} placeholder="Image URL" className="input input-bordered" />
-            <input {...register("company", { required: true })} placeholder="Company Name" className="input input-bordered" />
-            <input {...register("category", { required: true })} placeholder="Category" className="input input-bordered" />
+
+            <select {...register("company", { required: true })} className="select select-bordered">
+              <option value="">Select Company</option>
+              {companies.map((c) => (
+                <option key={c._id} value={c.name}>{c.name}</option>
+              ))}
+            </select>
+
+            <select {...register("category", { required: true })} className="select select-bordered">
+              <option value="">Select Category</option>
+              {categories.map((cat) => (
+                <option key={cat._id} value={cat.name}>{cat.name}</option>
+              ))}
+            </select>
+
             <input {...register("unit", { required: true })} placeholder="Unit (mg/ml)" className="input input-bordered" />
             <input type="number" {...register("price", { required: true })} placeholder="Price" className="input input-bordered" />
-            <input type="number" {...register("discount")} placeholder="Discount %" className="input input-bordered" />
+            <input type="number" {...register("discount")} placeholder="Discount %" defaultValue={0} className="input input-bordered" />
 
             <div className="modal-action">
               <button type="submit" className="btn bg-green-600 text-white">

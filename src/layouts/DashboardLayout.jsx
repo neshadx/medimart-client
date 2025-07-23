@@ -1,16 +1,25 @@
 import React, { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../Context/Provider/AuthProvider";
-import { useRole } from "../hooks/useRole"; // ✅ fixed named import
+import useRole from "../hooks/useRole";
 
 const DashboardLayout = () => {
   const { user, logout } = useContext(AuthContext);
-  const [role] = useRole(); // 'admin', 'seller', or 'user'
+  const [role, roleLoading] = useRole(); // ✅ Now handles loading
 
   const linkClass = ({ isActive }) =>
     isActive
       ? "font-semibold text-white bg-green-800 px-3 py-2 rounded"
       : "hover:text-green-200 px-3 py-2 rounded transition";
+
+  // ✅ Show loading until role is determined
+  if (roleLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-lg text-gray-600">
+        Loading Dashboard...
+      </div>
+    );
+  }
 
   return (
     <div className="lg:flex min-h-screen">
