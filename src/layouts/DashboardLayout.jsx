@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../Context/Provider/AuthProvider";
-import useRole from "../hooks/useRole"; // role check korar jonno
+import { useRole } from "../hooks/useRole"; // ✅ fixed named import
 
 const DashboardLayout = () => {
   const { user, logout } = useContext(AuthContext);

@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useAuth } from "./useAuth";
+import useAuth from "./useAuth"; // ✅ default import
 
 export const useRole = () => {
   const { user } = useAuth();

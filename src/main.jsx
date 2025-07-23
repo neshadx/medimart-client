@@ -313,9 +313,6 @@
 
 
 
-
-
-
 // 🟢 Main routing setup for MediMart
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -331,6 +328,7 @@ import { CartProvider } from "./Context/CartContext";
 
 import PrivateRoute from "./routes/PrivateRoute";
 import AdminRoute from "./routes/AdminRoute";
+import SellerRoute from "./routes/SellerRoute";
 
 import App from "./App";
 import Home from "./pages/Home";
@@ -346,7 +344,24 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 
 import DashboardLayout from "./layouts/DashboardLayout";
-import AdminHome from "./pages/Dashboard/Admin/AdminHome"; // ✅ Required now
+
+// ✅ Admin Dashboard Pages
+import AdminHome from "./pages/Dashboard/Admin/AdminHome";
+import ManageUsers from "./pages/Dashboard/Admin/ManageUsers";
+import ManageCategories from "./pages/Dashboard/Admin/ManageCategories";
+import PaymentManagement from "./pages/Dashboard/Admin/PaymentManagement";
+import SalesReport from "./pages/Dashboard/Admin/SalesReport";
+import ManageAdvertise from "./pages/Dashboard/Admin/ManageAdvertise";
+
+// ✅ Seller Dashboard Pages
+import SellerHome from "./pages/Dashboard/Seller/SellerHome";
+import ManageMedicines from "./pages/Dashboard/Seller/ManageMedicines";
+import SellerPaymentHistory from "./pages/Dashboard/Seller/SellerPaymentHistory";
+import AskForAdvertise from "./pages/Dashboard/Seller/AskForAdvertise";
+
+// ✅ User Dashboard Pages
+import UserHome from "./pages/Dashboard/User/UserHome";
+import UserPaymentHistory from "./pages/Dashboard/User/UserPaymentHistory";
 
 const queryClient = new QueryClient();
 
@@ -396,13 +411,105 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
-      // ✅ STEP 1: Only AdminHome now
+      // ✅ Admin Routes
       {
         path: "admin-home",
         element: (
           <AdminRoute>
             <AdminHome />
           </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-users",
+        element: (
+          <AdminRoute>
+            <ManageUsers />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-categories",
+        element: (
+          <AdminRoute>
+            <ManageCategories />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "payment-management",
+        element: (
+          <AdminRoute>
+            <PaymentManagement />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "sales-report",
+        element: (
+          <AdminRoute>
+            <SalesReport />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "manage-advertise",
+        element: (
+          <AdminRoute>
+            <ManageAdvertise />
+          </AdminRoute>
+        ),
+      },
+
+      // ✅ Seller Routes
+      {
+        path: "seller-home",
+        element: (
+          <SellerRoute>
+            <SellerHome />
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "manage-medicines",
+        element: (
+          <SellerRoute>
+            <ManageMedicines />
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "payment-history",
+        element: (
+          <SellerRoute>
+            <SellerPaymentHistory />
+          </SellerRoute>
+        ),
+      },
+      {
+        path: "ask-for-advertise",
+        element: (
+          <SellerRoute>
+            <AskForAdvertise />
+          </SellerRoute>
+        ),
+      },
+
+      // ✅ User Routes
+      {
+        path: "user-home",
+        element: (
+          <PrivateRoute>
+            <UserHome />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "user-payment-history",
+        element: (
+          <PrivateRoute>
+            <UserPaymentHistory />
+          </PrivateRoute>
         ),
       },
     ],
@@ -427,5 +534,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     </HelmetProvider>
   </React.StrictMode>
 );
-
-
