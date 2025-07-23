@@ -9,14 +9,16 @@ const AdminRoute = ({ children }) => {
   const location = useLocation();
 
   if (loading || roleLoading) {
-    return <div className="text-center mt-20">Loading...</div>;
+    return <div className="text-center mt-20 text-xl font-semibold text-gray-600">Loading...</div>;
   }
 
+  // ✅ Allow only admin users
   if (user && role === "admin") {
     return children;
   }
 
-  return <Navigate to="/login" state={{ from: location }} replace />;
+  // ❌ Not authorized
+  return <Navigate to="/unauthorized" state={{ from: location }} replace />;
 };
 
 export default AdminRoute;
