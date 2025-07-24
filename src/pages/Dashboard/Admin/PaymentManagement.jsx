@@ -20,7 +20,9 @@ const PaymentManagement = () => {
   // ✅ Accept Payment Mutation
   const mutation = useMutation({
     mutationFn: async (id) => {
-      const res = await axiosSecure.put(`/admin/payments/${id}`, { status: "paid" });
+      const res = await axiosSecure.put(`/admin/payments/${id}`, {
+        status: "paid",
+      });
       return res.data;
     },
     onSuccess: () => {
@@ -58,38 +60,44 @@ const PaymentManagement = () => {
             <thead className="bg-green-100 text-green-900 font-semibold">
               <tr>
                 <th>#</th>
-                <th>Buyer Email</th>
+                <th>Buyer</th>
                 <th>Transaction ID</th>
-                <th>Total</th>
+                <th>Amount</th>
                 <th>Status</th>
                 <th>Action</th>
               </tr>
             </thead>
             <tbody>
-              {payments.map((payment, idx) => (
-                <tr key={payment._id} className="hover:bg-gray-50">
-                  <td>{idx + 1}</td>
-                  <td>{payment.buyerEmail || "N/A"}</td>
-                  <td>{payment.transactionId || "N/A"}</td>
-                  <td>৳ {payment.total}</td>
-                  <td className={payment.status === "paid" ? "text-green-600" : "text-yellow-600"}>
-                    {payment.status}
-                  </td>
-                  <td>
-                    {payment.status === "pending" ? (
-                      <button
-                        className="btn btn-xs btn-success text-white"
-                        onClick={() => handleAccept(payment._id)}
-                        disabled={mutation.isLoading}
-                      >
-                        Accept
-                      </button>
-                    ) : (
-                      <span className="text-sm text-green-600">✔ Paid</span>
-                    )}
-                  </td>
-                </tr>
-              ))}
+              {[...payments]
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                .map((payment, idx) => (
+                  <tr key={payment._id} className="hover:bg-gray-50">
+                    <td>{idx + 1}</td>
+                    <td>{payment.buyerEmail || "N/A"}</td>
+                    <td>{payment.transactionId || "N/A"}</td>
+                    <td>৳ {parseFloat(payment.total).toFixed(2)}</td>
+                    <td>
+                      {payment.status === "paid" ? (
+                        <span className="text-green-600 font-semibold">✔ Paid</span>
+                      ) : (
+                        <span className="text-yellow-600 font-medium">🕒 Pending</span>
+                      )}
+                    </td>
+                    <td>
+                      {payment.status === "pending" ? (
+                        <button
+                          className="btn btn-xs bg-green-600 hover:bg-green-700 text-white"
+                          onClick={() => handleAccept(payment._id)}
+                          disabled={mutation.isLoading}
+                        >
+                          Accept
+                        </button>
+                      ) : (
+                        <span className="text-xs text-gray-400">--</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

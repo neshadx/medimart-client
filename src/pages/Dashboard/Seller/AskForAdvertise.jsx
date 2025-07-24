@@ -52,6 +52,11 @@ const AskForAdvertise = () => {
     mutation.mutate(data);
   };
 
+  // Optional: sort ads newest first
+  const sortedAds = [...ads].sort(
+    (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+  );
+
   return (
     <section className="max-w-6xl mx-auto px-4 py-10">
       <Helmet>
@@ -72,7 +77,9 @@ const AskForAdvertise = () => {
               {...register("image", { required: true })}
               className="input input-bordered w-full"
             />
-            {errors.image && <p className="text-red-500 text-sm">Image is required</p>}
+            {errors.image && (
+              <p className="text-red-500 text-sm">Image is required</p>
+            )}
           </div>
           <div>
             <label className="font-medium">Short Description</label>
@@ -80,7 +87,9 @@ const AskForAdvertise = () => {
               {...register("description", { required: true })}
               className="textarea textarea-bordered w-full"
             />
-            {errors.description && <p className="text-red-500 text-sm">Description is required</p>}
+            {errors.description && (
+              <p className="text-red-500 text-sm">Description is required</p>
+            )}
           </div>
           <button
             type="submit"
@@ -92,27 +101,37 @@ const AskForAdvertise = () => {
       </div>
 
       {/* 📝 Submitted Ads */}
+      <h3 className="text-xl font-semibold text-gray-700 mb-4">
+        Your Submitted Requests
+      </h3>
+
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {isLoading ? (
-          <p>Loading...</p>
-        ) : ads.length === 0 ? (
-          <p className="text-center text-gray-500 col-span-full">No advertisement requests yet.</p>
+          <p className="text-center text-gray-500 col-span-full">Loading ads...</p>
+        ) : sortedAds.length === 0 ? (
+          <p className="text-center text-gray-400 col-span-full">No advertisement requests yet.</p>
         ) : (
-          ads.map((ad) => (
-            <div key={ad._id} className="border rounded shadow p-4 space-y-2">
+          sortedAds.map((ad) => (
+            <div
+              key={ad._id}
+              className="border rounded shadow p-4 space-y-2 bg-white"
+            >
               <img
                 src={ad.image}
-                alt="ad"
+                alt="advertised"
                 className="w-full h-40 object-cover rounded"
               />
               <p className="text-gray-700 text-sm">{ad.description}</p>
               <p className="text-sm">
                 <span className="font-semibold">Status: </span>
                 {ad.isActive ? (
-                  <span className="text-green-600 font-bold">Active</span>
+                  <span className="text-green-600 font-bold">🟢 Active</span>
                 ) : (
-                  <span className="text-yellow-600">Pending</span>
+                  <span className="text-yellow-600 font-semibold">🕒 Pending</span>
                 )}
+              </p>
+              <p className="text-xs text-gray-400">
+                Requested on: {new Date(ad.createdAt).toLocaleDateString()}
               </p>
             </div>
           ))

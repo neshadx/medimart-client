@@ -5,7 +5,11 @@ import useRole from "../hooks/useRole";
 
 const DashboardLayout = () => {
   const { user, logout } = useContext(AuthContext);
-  const [role, roleLoading] = useRole(); // ✅ Now handles loading
+  const [role, roleLoading] = useRole(); 
+
+// console.log("Logged-in user from AuthContext:", user);
+// console.log("Role from useRole hook:", role);
+
 
   const linkClass = ({ isActive }) =>
     isActive

@@ -7,6 +7,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import jsPDF from "jspdf";
+import "jspdf-autotable";
 
 const SalesReport = () => {
   const [axiosSecure] = useAxiosSecure();
@@ -32,7 +34,6 @@ const SalesReport = () => {
     {
       name: "#",
       selector: (row, index) => index + 1,
-      sortable: true,
       width: "60px",
     },
     {
@@ -46,12 +47,13 @@ const SalesReport = () => {
     },
     {
       name: "Amount",
-      selector: (row) => `৳ ${row.total}`,
+      selector: (row) => `৳ ${parseFloat(row.total).toFixed(2)}`,
       sortable: true,
     },
     {
       name: "Status",
-      selector: (row) => row.status,
+      selector: (row) =>
+        row.status === "paid" ? "✔ Paid" : "🕒 Pending",
       sortable: true,
     },
     {
@@ -69,6 +71,25 @@ const SalesReport = () => {
     const buffer = XLSX.write(wb, { bookType: "xlsx", type: "array" });
     const blob = new Blob([buffer], { type: "application/octet-stream" });
     saveAs(blob, "sales-report.xlsx");
+  };
+
+  const exportToPDF = () => {
+    const doc = new jsPDF();
+    doc.text("Sales Report", 14, 16);
+    const tableData = filteredSales.map((sale, i) => [
+      i + 1,
+      sale.buyerEmail,
+      sale.transactionId || "N/A",
+      `৳ ${parseFloat(sale.total).toFixed(2)}`,
+      sale.status,
+      new Date(sale.createdAt).toLocaleDateString("en-GB"),
+    ]);
+    doc.autoTable({
+      head: [["#", "Buyer Email", "Transaction ID", "Amount", "Status", "Date"]],
+      body: tableData,
+      startY: 20,
+    });
+    doc.save("sales-report.pdf");
   };
 
   return (
@@ -104,12 +125,20 @@ const SalesReport = () => {
           </div>
         </div>
 
-        <button
-          onClick={exportToExcel}
-          className="btn bg-green-600 hover:bg-green-700 text-white"
-        >
-          Export Excel
-        </button>
+        <div className="flex gap-2 mt-2">
+          <button
+            onClick={exportToExcel}
+            className="btn bg-green-600 hover:bg-green-700 text-white"
+          >
+            Export Excel
+          </button>
+          <button
+            onClick={exportToPDF}
+            className="btn bg-blue-600 hover:bg-blue-700 text-white"
+          >
+            Export PDF
+          </button>
+        </div>
       </div>
 
       {/* 📋 Data Table */}
