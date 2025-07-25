@@ -107,7 +107,7 @@ const CategoryDetails = () => {
                 <th>#</th>
                 <th>Image</th>
                 <th>Name</th>
-                <th>Price ($)</th>
+                <th>Price (৳)</th>
                 <th>Rating</th>
                 <th>Stock</th>
                 <th>Seller</th>
@@ -127,7 +127,7 @@ const CategoryDetails = () => {
                     />
                   </td>
                   <td>{med.name}</td>
-                  <td>{med.discountedPrice || med.originalPrice || "N/A"}</td>
+                  <td>৳ {med.discountedPrice || med.originalPrice || "N/A"}</td>
                   <td>{med.rating || "N/A"}</td>
                   <td>{med.stock || "N/A"}</td>
                   <td>{med.seller || "N/A"}</td>
@@ -163,7 +163,7 @@ const CategoryDetails = () => {
               className={`btn btn-sm ${
                 currentPage === num + 1
                   ? "bg-green-600 text-white"
-                  : "bg-gray-200"
+                  : "bg-gray-200 text-black"
               }`}
               onClick={() => setCurrentPage(num + 1)}
             >
@@ -187,7 +187,7 @@ const CategoryDetails = () => {
             />
             <p>
               <strong>Price:</strong>{" "}
-              ${selectedMedicine.discountedPrice || selectedMedicine.originalPrice}
+              ৳ {selectedMedicine.discountedPrice || selectedMedicine.originalPrice}
             </p>
             <p>
               <strong>Rating:</strong> {selectedMedicine.rating || "N/A"}

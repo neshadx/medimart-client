@@ -808,7 +808,7 @@ const Shop = () => {
               className={`btn btn-sm ${
                 currentPage === num + 1
                   ? "bg-green-600 text-white"
-                  : "bg-gray-200"
+                  : "bg-gray-200 text-black"
               }`}
               onClick={() => setCurrentPage(num + 1)}
             >
@@ -834,19 +834,19 @@ const Shop = () => {
             </div>
             <div className="space-y-2 text-sm">
               <p>
-                <strong>💲 Price:</strong>{" "}
+                <strong> Price:</strong>{" "}
                 ৳ {(selectedMedicine.discountedPrice ?? selectedMedicine.originalPrice ?? 0).toFixed(2)}
               </p>
               <p>
-                <strong>⭐ Rating:</strong>{" "}
+                <strong> Rating:</strong>{" "}
                 {selectedMedicine.rating ?? "-"}
               </p>
               <p>
-                <strong>📦 Stock:</strong>{" "}
+                <strong> Stock:</strong>{" "}
                 {selectedMedicine.stock ?? 0}
               </p>
               <p>
-                <strong>🏪 Seller:</strong>{" "}
+                <strong> Seller:</strong>{" "}
                 {selectedMedicine.seller || selectedMedicine.company || "Unknown"}
               </p>
             </div>
