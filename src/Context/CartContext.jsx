@@ -1,78 +1,4 @@
 
-// // src/Context/CartContext.jsx
-// import { createContext, useContext, useState } from "react";
-
-// const CartContext = createContext();
-
-// export const CartProvider = ({ children }) => {
-//   const [cartItems, setCartItems] = useState([]);
-
-//   const addToCart = (medicine) => {
-//     const exists = cartItems.find((item) => item._id === medicine._id);
-//     if (exists) {
-//       setCartItems((prev) =>
-//         prev.map((item) =>
-//           item._id === medicine._id
-//             ? { ...item, quantity: item.quantity + 1 }
-//             : item
-//         )
-//       );
-//     } else {
-//       setCartItems([...cartItems, { ...medicine, quantity: 1 }]);
-//     }
-//   };
-
-//   const removeFromCart = (id) => {
-//     setCartItems((prev) => prev.filter((item) => item._id !== id));
-//   };
-
-//   const clearCart = () => {
-//     setCartItems([]);
-//   };
-
-//   const increaseQuantity = (id) => {
-//     setCartItems((prev) =>
-//       prev.map((item) =>
-//         item._id === id ? { ...item, quantity: item.quantity + 1 } : item
-//       )
-//     );
-//   };
-
-//   const decreaseQuantity = (id) => {
-//     setCartItems((prev) =>
-//       prev.map((item) =>
-//         item._id === id && item.quantity > 1
-//           ? { ...item, quantity: item.quantity - 1 }
-//           : item
-//       )
-//     );
-//   };
-
-//   const getTotalPrice = () => {
-//     return cartItems.reduce(
-//       (total, item) => total + item.price * item.quantity,
-//       0
-//     );
-//   };
-
-//   return (
-//     <CartContext.Provider
-//       value={{
-//         cartItems,
-//         addToCart,
-//         removeFromCart,
-//         clearCart,
-//         increaseQuantity,
-//         decreaseQuantity,
-//         getTotalPrice,
-//       }}
-//     >
-//       {children}
-//     </CartContext.Provider>
-//   );
-// };
-
-// export const useCart = () => useContext(CartContext);
 
 
 
@@ -84,8 +10,13 @@
 // export const CartProvider = ({ children }) => {
 //   const [cartItems, setCartItems] = useState([]);
 
-//   // ✅ Add to cart with quantity support
+//   // ✅ Add to cart with quantity support (fix: parseFloat for price)
 //   const addToCart = (medicine) => {
+//     const parsedPrice = parseFloat(medicine.price);
+//     const parsedDiscount = medicine.discountedPrice
+//       ? parseFloat(medicine.discountedPrice)
+//       : null;
+
 //     const exists = cartItems.find((item) => item._id === medicine._id);
 //     if (exists) {
 //       setCartItems((prev) =>
@@ -96,7 +27,15 @@
 //         )
 //       );
 //     } else {
-//       setCartItems([...cartItems, { ...medicine, quantity: 1 }]);
+//       setCartItems([
+//         ...cartItems,
+//         {
+//           ...medicine,
+//           price: parsedPrice,
+//           discountedPrice: parsedDiscount,
+//           quantity: 1,
+//         },
+//       ]);
 //     }
 //   };
 
@@ -130,12 +69,12 @@
 //     );
 //   };
 
-//   // ✅ Calculate total price
+//   // ✅ Calculate total price (discounted if available)
 //   const getTotalPrice = () => {
-//     return cartItems.reduce(
-//       (total, item) => total + item.price * item.quantity,
-//       0
-//     );
+//     return cartItems.reduce((total, item) => {
+//       const unitPrice = item.discountedPrice ?? item.price;
+//       return total + unitPrice * item.quantity;
+//     }, 0);
 //   };
 
 //   return (
@@ -162,14 +101,23 @@
 
 
 // src/Context/CartContext.jsx
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
+  // ✅ Load cart from localStorage when component mounts
+  const [cartItems, setCartItems] = useState(() => {
+    const savedCart = localStorage.getItem("medimart-cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
 
-  // ✅ Add to cart with quantity support (fix: parseFloat for price)
+  // ✅ Save cart to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("medimart-cart", JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  // ✅ Add to cart with quantity & price parsing
   const addToCart = (medicine) => {
     const parsedPrice = parseFloat(medicine.price);
     const parsedDiscount = medicine.discountedPrice
@@ -254,3 +202,4 @@ export const CartProvider = ({ children }) => {
 };
 
 export const useCart = () => useContext(CartContext);
+

@@ -31,7 +31,7 @@ main.flex-grow {
 /*  Swiper arrow base */
 .swiper-button-next,
 .swiper-button-prev {
-  color: #ED8336 !important;
+  color: #38A169 !important;
   font-size: 20px;
   width: 32px;
   height: 32px;
@@ -41,7 +41,7 @@ main.flex-grow {
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
   transform: scale(1.2);
-  color: #ED8336 !important;
+  color: #38A169 !important;
 }
 
 /*  Arrow icon actual size */
@@ -58,7 +58,7 @@ main.flex-grow {
 }
 
 .swiper-pagination-bullet-active {
-  background: #ED8336 !important;
+  background: #38A169 !important;
   transform: scale(1.4);
 }
 

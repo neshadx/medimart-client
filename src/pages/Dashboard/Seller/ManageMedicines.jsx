@@ -1019,7 +1019,7 @@ const ManageMedicines = () => {
                   <td>{m.generic || "N/A"}</td>
                   <td>{m.company || "N/A"}</td>
                   <td>{m.unit || "N/A"}</td>
-                  <td>{m.price ? `৳ ${m.price}` : "N/A"}</td>
+  <td> ৳{" "} {(m.originalPrice ?? m.price)?.toFixed(2) ?? "N/A"}</td>
                   <td>{m.discount || 0}%</td>
                   <td className="space-x-1">
                     <button
