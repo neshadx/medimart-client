@@ -55,19 +55,19 @@ const testimonials = [
     name: "Tanvir Hasan",
     review:
       "MediMart is the most reliable online pharmacy. Their delivery is super fast and all medicines are genuine.",
-    image: "https://i.ibb.co/gT3n4JY/user1.png",
+    image: "https://i.postimg.cc/tCHbk1V9/client.jpg",
   },
   {
     name: "Farzana Ahmed",
     review:
       "I’ve ordered multiple times and never been disappointed. Customer service is also excellent!",
-    image: "https://i.ibb.co/G0rVRrx/user2.png",
+    image: "https://i.postimg.cc/Qt08wjLf/Client.jpg",
   },
   {
     name: "Rafiq Islam",
     review:
       "Buying medicine has never been easier. Highly recommend MediMart to everyone!",
-    image: "https://i.ibb.co/y5kCWLp/user3.png",
+    image: "https://i.postimg.cc/Pxrhm0LY/client.png",
   },
 ];
 

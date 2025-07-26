@@ -57,11 +57,11 @@
 const companies = [
   {
     name: "Square Pharma",
-    image: "https://i.ibb.co/ZNRwpXP/square.png",
+    image: "https://i.postimg.cc/g2zW9fD5/home01.jpg",
   },
   {
     name: "Beximco Pharma",
-    image: "https://i.ibb.co/J27RRY9/beximco.png",
+    image: "https://i.postimg.cc/tR3wXBYH/Rabbu-Reza-Beximco-Pharmaceutical-2.jpg",
   },
   {
     name: "Incepta Pharma",
