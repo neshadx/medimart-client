@@ -117,7 +117,7 @@ const ManageAdvertise = () => {
       });
     },
     onSuccess: () => {
-      toast.success("✅ Slider status updated!");
+      toast.success(" Slider status updated!");
       queryClient.invalidateQueries(["adminAdvertised"]);
     },
     onError: () => {
@@ -155,10 +155,15 @@ const ManageAdvertise = () => {
                 className="bg-white border rounded shadow-md p-4 flex flex-col items-center text-center space-y-3"
               >
                 <img
-                  src={item.image || "https://via.placeholder.com/300x180.png?text=Image+Not+Found"}
-                  alt={item.name}
-                  className="w-full h-40 object-cover rounded border"
-                />
+  src={
+    item.image
+      ? `${import.meta.env.VITE_API_URL}${item.image}`
+      : "https://via.placeholder.com/300x180.png?text=Image+Not+Found"
+  }
+  alt={item.name}
+  className="w-full h-40 object-cover rounded border"
+/>
+
                 <h3 className="text-lg font-bold text-green-700">{item.name}</h3>
                 <p className="text-sm text-gray-600">{item.description}</p>
                 <p className="text-sm text-gray-500">

@@ -423,7 +423,7 @@ const SalesReport = () => {
     XLSX.utils.book_append_sheet(workbook, worksheet, "Sales Report");
     XLSX.writeFile(workbook, "sales-report.xlsx");
 
-    toast.success("✅ Excel downloaded successfully!");
+    toast.success(" Excel downloaded successfully!");
   };
 
   const exportToPDF = () => {
@@ -451,7 +451,7 @@ const SalesReport = () => {
 
       doc.save("sales-report.pdf");
 
-      toast.success("✅ PDF downloaded successfully!");
+      toast.success(" PDF downloaded successfully!");
     } catch (error) {
       console.error("PDF Export Error:", error);
       toast.error("❌ PDF export failed. Check console.");

@@ -117,7 +117,7 @@ const ManageUsers = () => {
   const handleRoleChange = async (id, role) => {
     try {
       await axiosSecure.put(`/admin/update-role/${id}`, { role });
-      toast.success(`✅ Role updated to ${role}`);
+      toast.success(` Role updated to ${role}`);
       refetch();
     } catch (err) {
       toast.error("❌ Failed to update role");
@@ -157,21 +157,24 @@ const ManageUsers = () => {
                     <button
                       disabled={u.role === "admin"}
                       onClick={() => handleRoleChange(u._id, "admin")}
-                      className="btn btn-xs bg-green-600 text-white hover:bg-green-700 disabled:opacity-50"
+                      className="btn btn-xs bg-green-600 text-white hover:bg-green-700 disabled:bg-gray-200 disabled:text-black disabled:border disabled:border-gray-300 disabled:cursor-not-allowed
+"
                     >
                       Make Admin
                     </button>
                     <button
                       disabled={u.role === "seller"}
                       onClick={() => handleRoleChange(u._id, "seller")}
-                      className="btn btn-xs bg-yellow-500 text-white hover:bg-yellow-600 disabled:opacity-50"
+                      className="btn btn-xs bg-yellow-500 text-white hover:bg-yellow-600 disabled:bg-gray-200 disabled:text-black disabled:border disabled:border-gray-300 disabled:cursor-not-allowed
+"
                     >
                       Make Seller
                     </button>
                     <button
                       disabled={u.role === "user"}
                       onClick={() => handleRoleChange(u._id, "user")}
-                      className="btn btn-xs bg-red-500 text-white hover:bg-red-600 disabled:opacity-50"
+                      className="btn btn-xs bg-red-500 text-white hover:bg-red-600 disabled:bg-gray-200 disabled:text-black disabled:border disabled:border-gray-300 disabled:cursor-not-allowed
+"
                     >
                       Downgrade
                     </button>

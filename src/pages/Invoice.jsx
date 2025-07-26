@@ -114,7 +114,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import logo from "../assets/ico.png";
+import logo from "../assets/medi.png";
 import { toast } from "react-toastify";
 
 const Invoice = () => {
@@ -201,9 +201,9 @@ const Invoice = () => {
                   <td>{idx + 1}</td>
                   <td>{item.name}</td>
                   <td>{item.company || "N/A"}</td>
-                  <td>${item.price}</td>
+                  <td>৳{item.price}</td>
                   <td>{item.quantity}</td>
-                  <td>${(item.price * item.quantity).toFixed(2)}</td>
+                  <td>৳{(item.price * item.quantity).toFixed(2)}</td>
                 </tr>
               ))}
             </tbody>
@@ -212,13 +212,13 @@ const Invoice = () => {
 
         {/* Grand Total */}
         <div className="text-right text-lg font-bold text-green-700">
-          Grand Total: ${total.toFixed(2)}
+          Grand Total: ৳{total.toFixed(2)}
         </div>
       </div>
 
       {/* Print Button */}
       <div className="text-center mt-6">
-        <button onClick={handlePrint} className="btn btn-primary">
+        <button onClick={handlePrint} className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded transition">
           🖨️ Print Invoice
         </button>
       </div>

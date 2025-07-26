@@ -743,7 +743,7 @@ const AskForAdvertise = () => {
               />
               <p className="text-gray-700 text-sm">{ad.description}</p>
               <p className="text-sm">
-                <span className="font-semibold">Status: </span>
+                <span className="text-black font-semibold">Status: </span>
                 {ad.isActive ? (
                   <span className="text-green-600 font-bold">🟢 Active</span>
                 ) : (

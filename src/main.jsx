@@ -343,11 +343,16 @@ import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import "./i18n";
+
+
+
 
 
 import DashboardLayout from "./layouts/DashboardLayout";
 
 // ✅ Admin Dashboard Pages
+import UpdateProfile from "./pages/Dashboard/Shared/UpdateProfile";
 import AdminHome from "./pages/Dashboard/Admin/AdminHome";
 import ManageUsers from "./pages/Dashboard/Admin/ManageUsers";
 import ManageCategories from "./pages/Dashboard/Admin/ManageCategories";
@@ -410,6 +415,7 @@ const router = createBrowserRouter([
       { path: "contact", element: <Contact /> },
     ],
   },
+
   {
     path: "/dashboard",
     element: (
@@ -418,6 +424,14 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      {
+  path: "update-profile",
+  element: (
+    <PrivateRoute>
+      <UpdateProfile />
+    </PrivateRoute>
+  ),
+},
       // ✅ Dynamic redirect based on role
       {
         index: true,
