@@ -1,44 +1,92 @@
+# 🏥 MediMart - Multi-Vendor Medicine Selling Platform
 
-# SwiftCarz – Car Rental & Booking Platform
+MediMart is a full-stack multi-vendor e-commerce platform designed to sell medicines online. It supports user, seller, and admin roles, dynamic category-based browsing, Firebase authentication, Stripe payments, and a full-featured dashboard. The UI is built using React, TailwindCSS, and DaisyUI with an elegant light-only design.
 
-SwiftCarz is a full-stack car rental platform that allows users to explore available cars, book rentals, modify bookings, and manage cars with secure JWT authentication. The app supports a seamless user experience with protected routes, dynamic car details, booking modals, and a modern UI.
+## 🔥 Features
 
-## 🔗 Live Demo
+### 🧑‍⚕️ General Users
+- Browse medicines by category
+- Add items to cart
+- Checkout with Stripe payment
+- View and download invoices
+- Multi-language support (EN/BN)
 
-👉 [Visit SwiftCarz Live Site]( https://musical-gecko-f6cbb2.netlify.app) 
+### 🧾 Sellers
+- Upload & manage medicines with images
+- Set discounts and request advertisements
+- Track payment history
+- Role-based protected dashboard
 
-## 🚀 Features
-
-* 🔐 **JWT Authentication** – Secure login system using Firebase Auth and HTTP-only cookies
-* 🧾 **Add / Update / Delete Cars** – Admins can manage cars with details like model, price, and location
-* 🧳 **Book a Car** – Users can browse cars and place rental bookings with date selection
-* 📆 **Modify or Cancel Bookings** – Users can change booking dates or cancel them
-* 🛡 **Protected Routes** – Authenticated access to booking and car management features
-* 🌐 **Responsive UI** – Optimized for mobile, tablet, and desktop
-* 🌙 **Dark Mode** – Light/dark theme toggle with Tailwind
-* 🎨 **Dashboard Views** – Clean table and card layouts with sorting and filters
+### 🛡️ Admin
+- Manage users and categories
+- Approve advertisement requests
+- Monitor payment transactions
+- Generate sales report (Excel & PDF)
+- Role-based route protection
 
 ---
 
-## 💻 Tech Stack
+## 🛠️ Tech Stack
 
-### Frontend
+### 🔹 Frontend
+- React + Vite
+- Tailwind CSS + DaisyUI
+- React Router DOM
+- React Hook Form
+- React Toastify
+- TanStack React Query
+- SwiperJS (for sliders)
 
-* ⚛️ **React** (Vite)
-* 🔐 **Firebase Authentication**
-* 🌈 **Tailwind CSS** + **DaisyUI**
-* 🚦 **React Router DOM**
-* 🎩 **React Helmet Async**
-* 📅 **React Date Picker**
-* 🔔 **SweetAlert2** for alerts
+### 🔸 Backend
+- Node.js + Express
+- MongoDB (with Atlas)
+- Firebase Admin SDK (JWT Verification)
+- express-fileupload (for image upload)
+- Stripe Payment Integration
 
-### Backend
+---
 
-* 🛠 **Express.js** (single file setup)
-* 🍪 **JWT + Cookie Parser**
-* 🌍 **CORS Configured** for secure cross-origin cookies
-* 💾 **MongoDB Atlas** for storing cars and bookings
-* 🧪 **Environment Variables** managed via Vercel/Render
+
+---
+
+## 🔐 Authentication
+- Firebase Authentication
+- Login with Email/Password or Google
+- JWT Token issued and verified by Firebase Admin SDK
+- Role-based dashboard routing
+
+---
+
+## 💳 Payment Integration
+- Stripe checkout
+- Invoice saved to MongoDB
+- Admin can mark payment as “Paid”
+- Sales report filtered by date range
+- Export to Excel or PDF
+
+---
+
+## 📸 Image Handling
+- Medicine images and advertisement banners uploaded with `express-fileupload`
+- Stored temporarily (can be migrated to Cloudinary/AWS later)
+
+---
+
+## 📊 Advanced Features
+- Admin Sales Report with date filters
+- Download as PDF/Excel
+- Animated sliders for banners & discounted products
+- Animated floating top company logos
+- Clean and responsive design (mobile & desktop)
+
+---
+
+## 🚀 Live Preview (Optional)
+If deployed, you can add:
+```bash
+🌐 Live URL: https://medimart.vercel.app
+
+
 
 ---
 
