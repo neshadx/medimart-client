@@ -79,11 +79,10 @@ MediMart is a full-stack multi-vendor e-commerce platform designed to sell medic
 - Animated floating top company logos
 - Clean and responsive design (mobile & desktop)
 
----
 
-## 🚀 Live Preview (Optional)
-If deployed, you can add:
-```bash
+
+## 🚀 Live Preview 
+
 🌐 Live URL: https://medimart.vercel.app
 
 
