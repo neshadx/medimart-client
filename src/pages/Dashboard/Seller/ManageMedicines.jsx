@@ -1021,7 +1021,7 @@ const ManageMedicines = () => {
                   <td>{m.unit || "N/A"}</td>
   <td> ৳{" "} {(m.originalPrice ?? m.price)?.toFixed(2) ?? "N/A"}</td>
                   <td>{m.discount || 0}%</td>
-                  <td className="space-x-1">
+                  <td className="flex flex-wrap gap-2">
                     <button
                       onClick={() => handleEdit(m)}
                       className="btn btn-xs bg-yellow-400 hover:bg-yellow-500 text-white"

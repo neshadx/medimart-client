@@ -145,6 +145,104 @@
 
 
 
+// import { useCart } from "../Context/CartContext";
+// import { Link } from "react-router-dom";
+
+// const Cart = () => {
+//   const {
+//     cartItems,
+//     removeFromCart,
+//     clearCart,
+//     increaseQuantity,
+//     decreaseQuantity,
+//     getTotalPrice,
+//   } = useCart();
+
+//   const total = getTotalPrice();
+
+//   return (
+//     <div className="min-h-screen px-4 py-10 text-center">
+//       <h1 className="text-3xl font-bold mb-6 text-[#0AA946]">🛒 Your Cart</h1>
+
+//       {cartItems.length === 0 ? (
+//         <p className="text-gray-600">No items in the cart yet.</p>
+//       ) : (
+//         <>
+//           <div className="overflow-x-auto">
+//             <table className="table w-full max-w-5xl mx-auto border">
+//               <thead>
+//                 <tr className="bg-green-100 text-black">
+//                   <th>#</th>
+//                   <th>Name</th>
+//                   <th>Company</th>
+//                   <th>Price/Unit (৳)</th>
+//                   <th>Quantity</th>
+//                   <th>Total (৳)</th>
+//                   <th>Remove</th>
+//                 </tr>
+//               </thead>
+//               <tbody>
+//                 {cartItems.map((item, i) => (
+//                   <tr key={item._id}>
+//                     <td>{i + 1}</td>
+//                     <td>{item.name}</td>
+//                     <td>{item.company}</td>
+//                     <td>৳ {parseFloat(item.price).toFixed(2)}</td>
+//                     <td className="flex items-center justify-center gap-2">
+//                       <button
+//                         onClick={() => decreaseQuantity(item._id)}
+//                         className="btn btn-xs"
+//                       >
+//                         −
+//                       </button>
+//                       <span>{item.quantity}</span>
+//                       <button
+//                         onClick={() => increaseQuantity(item._id)}
+//                         className="btn btn-xs"
+//                       >
+//                         +
+//                       </button>
+//                     </td>
+//                     <td>৳ {(item.price * item.quantity).toFixed(2)}</td>
+//                     <td>
+//                       <button
+//                         onClick={() => removeFromCart(item._id)}
+//                         className="btn btn-sm btn-error"
+//                       >
+//                         Remove
+//                       </button>
+//                     </td>
+//                   </tr>
+//                 ))}
+//               </tbody>
+//             </table>
+//           </div>
+
+//           <div className="mt-8 flex flex-col items-center gap-4">
+//             <p className="text-xl font-semibold">
+//               Grand Total:{" "}
+//               <span className="text-green-600">
+//                 ৳ {parseFloat(total).toFixed(2)}
+//               </span>
+//             </p>
+
+//             <div className="flex gap-4">
+//               <button onClick={clearCart} className="btn btn-warning">
+//                 Clear All
+//               </button>
+//               <Link to="/checkout" className="btn btn-success">
+//                 Proceed to Checkout
+//               </Link>
+//             </div>
+//           </div>
+//         </>
+//       )}
+//     </div>
+//   );
+// };
+
+// export default Cart;
+
 import { useCart } from "../Context/CartContext";
 import { Link } from "react-router-dom";
 
@@ -168,8 +266,9 @@ const Cart = () => {
         <p className="text-gray-600">No items in the cart yet.</p>
       ) : (
         <>
+          {/* ✅ Table Scrollable for Mobile */}
           <div className="overflow-x-auto">
-            <table className="table w-full max-w-5xl mx-auto border">
+            <table className="table w-full min-w-[800px] max-w-5xl mx-auto border">
               <thead>
                 <tr className="bg-green-100 text-black">
                   <th>#</th>
@@ -188,20 +287,22 @@ const Cart = () => {
                     <td>{item.name}</td>
                     <td>{item.company}</td>
                     <td>৳ {parseFloat(item.price).toFixed(2)}</td>
-                    <td className="flex items-center justify-center gap-2">
-                      <button
-                        onClick={() => decreaseQuantity(item._id)}
-                        className="btn btn-xs"
-                      >
-                        −
-                      </button>
-                      <span>{item.quantity}</span>
-                      <button
-                        onClick={() => increaseQuantity(item._id)}
-                        className="btn btn-xs"
-                      >
-                        +
-                      </button>
+                    <td>
+                      <div className="flex items-center justify-center gap-2">
+                        <button
+                          onClick={() => decreaseQuantity(item._id)}
+                          className="btn btn-xs"
+                        >
+                          −
+                        </button>
+                        <span>{item.quantity}</span>
+                        <button
+                          onClick={() => increaseQuantity(item._id)}
+                          className="btn btn-xs"
+                        >
+                          +
+                        </button>
+                      </div>
                     </td>
                     <td>৳ {(item.price * item.quantity).toFixed(2)}</td>
                     <td>
@@ -218,19 +319,20 @@ const Cart = () => {
             </table>
           </div>
 
-          <div className="mt-8 flex flex-col items-center gap-4">
-            <p className="text-xl font-semibold">
+          {/* ✅ Responsive Grand Total + Buttons */}
+          <div className="mt-8 flex flex-col items-center gap-4 px-2">
+            <p className="text-xl font-semibold text-center">
               Grand Total:{" "}
               <span className="text-green-600">
                 ৳ {parseFloat(total).toFixed(2)}
               </span>
             </p>
 
-            <div className="flex gap-4">
-              <button onClick={clearCart} className="btn btn-warning">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <button onClick={clearCart} className="btn btn-warning w-full sm:w-auto">
                 Clear All
               </button>
-              <Link to="/checkout" className="btn btn-success">
+              <Link to="/checkout" className="btn btn-success w-full sm:w-auto">
                 Proceed to Checkout
               </Link>
             </div>
@@ -242,5 +344,4 @@ const Cart = () => {
 };
 
 export default Cart;
-
 

@@ -110,7 +110,127 @@
 
 
 
-// src/pages/Invoice.jsx
+// // src/pages/Invoice.jsx
+// import { useEffect, useState, useRef } from "react";
+// import { useNavigate } from "react-router-dom";
+// import { Helmet } from "react-helmet-async";
+// import logo from "../assets/medi.png";
+// import { toast } from "react-toastify";
+
+// const Invoice = () => {
+//   const [invoice, setInvoice] = useState(null);
+//   const navigate = useNavigate();
+//   const printRef = useRef();
+
+//   useEffect(() => {
+//     const stored = JSON.parse(localStorage.getItem("invoice"));
+//     if (!stored) {
+//       toast.error("No invoice found!");
+//       navigate("/");
+//       return;
+//     }
+//     setInvoice(stored);
+//   }, [navigate]);
+
+//   const handlePrint = () => {
+//     const content = printRef.current;
+//     const win = window.open("", "", "width=800,height=600");
+//     win.document.write(`
+//       <html>
+//         <head>
+//           <title>Invoice</title>
+//           <style>
+//             body { font-family: sans-serif; padding: 20px; }
+//             table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+//             th, td { padding: 8px; border: 1px solid #ccc; text-align: left; }
+//             .header { display: flex; justify-content: space-between; align-items: center; }
+//           </style>
+//         </head>
+//         <body>${content.innerHTML}</body>
+//       </html>
+//     `);
+//     win.document.close();
+//     win.print();
+//   };
+
+//   if (!invoice) return null;
+
+//   const { cartItems, total, transactionId, paymentDate, buyerEmail } = invoice;
+
+//   return (
+//     <section className="max-w-4xl mx-auto px-4 py-10 bg-white">
+//       <Helmet>
+//         <title>Invoice | MediMart</title>
+//       </Helmet>
+
+//       <div ref={printRef} className="border p-6 rounded shadow text-sm">
+//         {/* Header */}
+//         <div className="flex items-center justify-between mb-6">
+//           <div className="flex items-center gap-3">
+//             <img src={logo} alt="logo" className="w-12 h-12" />
+//             <h2 className="text-2xl font-bold text-green-600">MediMart</h2>
+//           </div>
+//           <div className="text-right text-gray-600 text-xs">
+//             <p>Transaction ID: <span className="font-semibold">{transactionId}</span></p>
+//             <p>Date: {new Date(paymentDate).toLocaleString()}</p>
+//           </div>
+//         </div>
+
+//         {/* Buyer Info */}
+//         <div className="mb-6">
+//           <h3 className="text-lg font-bold mb-1 text-gray-700">Customer Info</h3>
+//           <p>Email: <span className="font-semibold">{buyerEmail || "Anonymous"}</span></p>
+//         </div>
+
+//         {/* Items Table */}
+//         <div className="overflow-x-auto mb-6">
+//           <table className="table border">
+//             <thead className="bg-green-100 text-green-800 text-sm">
+//               <tr>
+//                 <th>#</th>
+//                 <th>Medicine</th>
+//                 <th>Company</th>
+//                 <th>Price</th>
+//                 <th>Qty</th>
+//                 <th>Total</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {cartItems.map((item, idx) => (
+//                 <tr key={idx}>
+//                   <td>{idx + 1}</td>
+//                   <td>{item.name}</td>
+//                   <td>{item.company || "N/A"}</td>
+//                   <td>৳{item.price}</td>
+//                   <td>{item.quantity}</td>
+//                   <td>৳{(item.price * item.quantity).toFixed(2)}</td>
+//                 </tr>
+//               ))}
+//             </tbody>
+//           </table>
+//         </div>
+
+//         {/* Grand Total */}
+//         <div className="text-right text-lg font-bold text-green-700">
+//           Grand Total: ৳{total.toFixed(2)}
+//         </div>
+//       </div>
+
+//       {/* Print Button */}
+//       <div className="text-center mt-6">
+//         <button onClick={handlePrint} className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded transition">
+//           🖨️ Print Invoice
+//         </button>
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Invoice;
+
+
+
+
 import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
@@ -163,28 +283,40 @@ const Invoice = () => {
         <title>Invoice | MediMart</title>
       </Helmet>
 
-      <div ref={printRef} className="border p-6 rounded shadow text-sm">
+      {/* ✅ Printable Area */}
+      <div
+        ref={printRef}
+        className="border p-4 md:p-6 rounded shadow text-sm bg-white"
+      >
         {/* Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-6">
           <div className="flex items-center gap-3">
-            <img src={logo} alt="logo" className="w-12 h-12" />
-            <h2 className="text-2xl font-bold text-green-600">MediMart</h2>
+            <img src={logo} alt="logo" className="w-10 h-10 md:w-12 md:h-12" />
+            <h2 className="text-xl md:text-2xl font-bold text-green-600">MediMart</h2>
           </div>
-          <div className="text-right text-gray-600 text-xs">
-            <p>Transaction ID: <span className="font-semibold">{transactionId}</span></p>
+          <div className="text-gray-600 text-xs md:text-right">
+            <p>
+              Transaction ID:{" "}
+              <span className="font-semibold">{transactionId}</span>
+            </p>
             <p>Date: {new Date(paymentDate).toLocaleString()}</p>
           </div>
         </div>
 
         {/* Buyer Info */}
         <div className="mb-6">
-          <h3 className="text-lg font-bold mb-1 text-gray-700">Customer Info</h3>
-          <p>Email: <span className="font-semibold">{buyerEmail || "Anonymous"}</span></p>
+          <h3 className="text-base md:text-lg font-bold mb-1 text-gray-700">
+            Customer Info
+          </h3>
+          <p>
+            Email:{" "}
+            <span className="font-semibold">{buyerEmail || "Anonymous"}</span>
+          </p>
         </div>
 
-        {/* Items Table */}
+        {/* Items Table - scrollable on mobile */}
         <div className="overflow-x-auto mb-6">
-          <table className="table border">
+          <table className="table w-full min-w-[700px] border">
             <thead className="bg-green-100 text-green-800 text-sm">
               <tr>
                 <th>#</th>
@@ -218,7 +350,10 @@ const Invoice = () => {
 
       {/* Print Button */}
       <div className="text-center mt-6">
-        <button onClick={handlePrint} className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded transition">
+        <button
+          onClick={handlePrint}
+          className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded transition w-full sm:w-auto"
+        >
           🖨️ Print Invoice
         </button>
       </div>
@@ -227,4 +362,5 @@ const Invoice = () => {
 };
 
 export default Invoice;
+
 
