@@ -17,7 +17,7 @@ const About = () => {
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div>
             <img
-              src="https://i.ibb.co/Ykm7gr9/pharmacy-about.jpg"
+              src="https://i.postimg.cc/qq27CbGV/pexels-castorlystock-4058358.jpg"
               alt="About MediMart"
               className="rounded-xl shadow-md w-full object-cover"
             />
