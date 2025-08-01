@@ -83,7 +83,7 @@ MediMart is a full-stack multi-vendor e-commerce platform designed to sell medic
 
 ## 🚀 Live Preview 
 
-🌐 Live URL: https://medimart.vercel.app
+🌐 Live URL: https://medimart-hub.netlify.app
 
 
 
