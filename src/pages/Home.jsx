@@ -68,6 +68,8 @@ import TopCompanies from "../Components/TopCompanies";
 import Testimonials from "../Components/Testimonials";
 import Newsletter from "../Components/Newsletter";
 import MissionVision from "../Components/MissionVision";
+import ServicesSection from "../Components/ServicesSection";
+
 
 
 const Home = () => {
@@ -109,6 +111,13 @@ const Home = () => {
     <MissionVision />
   </div>
 </div>
+
+{/* Our Services */}
+      <div className="bg-gray-50 py-10">
+        <div className="max-w-7xl mx-auto px-4">
+          <ServicesSection />
+        </div>
+      </div>
 
       {/*  Top Pharma Companies */}
       <div className="bg-white py-10">
