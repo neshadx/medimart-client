@@ -50,49 +50,109 @@
 
 
 
+// import { FaCapsules, FaShippingFast, FaThumbsUp, FaHeadset } from "react-icons/fa";
+
+// const WhyChooseUs = () => {
+//   const reasons = [
+//     {
+//       icon: <FaCapsules className="text-4xl text-green-600" />,
+//       title: "Genuine Medicines",
+//       desc: "All medicines are 100% authentic and sourced directly from trusted pharmaceutical brands.",
+//     },
+//     {
+//       icon: <FaShippingFast className="text-4xl text-green-600" />,
+//       title: "Fast Delivery",
+//       desc: "Superfast delivery across Bangladesh within 24 hours. Track your order anytime.",
+//     },
+//     {
+//       icon: <FaThumbsUp className="text-4xl text-green-600" />,
+//       title: "Trusted by Thousands",
+//       desc: "Thousands of customers rely on MediMart for hassle-free medicine delivery.",
+//     },
+//     {
+//       icon: <FaHeadset className="text-4xl text-green-600" />,
+//       title: "24/7 Customer Support",
+//       desc: "Get assistance anytime through live chat, email or call – we're always here to help.",
+//     },
+//   ];
+
+//   return (
+//     <section className="bg-gradient-to-b from-white to-green-50 py-16 px-4 md:px-12 rounded-xl my-20">
+//       <h2 className="text-3xl md:text-4xl font-bold text-center text-green-700 mb-12">
+//         Why Choose <span className="text-green-600">MediMart?</span>
+//       </h2>
+
+//       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+//         {reasons.map((reason, index) => (
+//           <div
+//             key={index}
+//             className="bg-white border border-green-100 shadow hover:shadow-lg rounded-xl p-6 text-center transition-transform transform hover:-translate-y-1"
+//           >
+//             <div className="flex justify-center items-center mb-4">
+//               {reason.icon}
+//             </div>
+//             <h3 className="text-lg font-semibold text-gray-800 mb-2">{reason.title}</h3>
+//             <p className="text-gray-600 text-sm">{reason.desc}</p>
+//           </div>
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default WhyChooseUs;
+
 import { FaCapsules, FaShippingFast, FaThumbsUp, FaHeadset } from "react-icons/fa";
 
 const WhyChooseUs = () => {
   const reasons = [
     {
-      icon: <FaCapsules className="text-4xl text-green-600" />,
+      icon: <FaCapsules className="text-5xl text-green-600" />,
       title: "Genuine Medicines",
       desc: "All medicines are 100% authentic and sourced directly from trusted pharmaceutical brands.",
     },
     {
-      icon: <FaShippingFast className="text-4xl text-green-600" />,
+      icon: <FaShippingFast className="text-5xl text-green-600" />,
       title: "Fast Delivery",
       desc: "Superfast delivery across Bangladesh within 24 hours. Track your order anytime.",
     },
     {
-      icon: <FaThumbsUp className="text-4xl text-green-600" />,
+      icon: <FaThumbsUp className="text-5xl text-green-600" />,
       title: "Trusted by Thousands",
       desc: "Thousands of customers rely on MediMart for hassle-free medicine delivery.",
     },
     {
-      icon: <FaHeadset className="text-4xl text-green-600" />,
+      icon: <FaHeadset className="text-5xl text-green-600" />,
       title: "24/7 Customer Support",
       desc: "Get assistance anytime through live chat, email or call – we're always here to help.",
     },
   ];
 
   return (
-    <section className="bg-gradient-to-b from-white to-green-50 py-16 px-4 md:px-12 rounded-xl my-20">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-green-700 mb-12">
+    <section className="bg-gradient-to-b from-white to-green-50 py-16 px-4 md:px-12 rounded-2xl my-20">
+      {/* Title */}
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center text-green-700 mb-14">
         Why Choose <span className="text-green-600">MediMart?</span>
       </h2>
 
+      {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
         {reasons.map((reason, index) => (
           <div
             key={index}
-            className="bg-white border border-green-100 shadow hover:shadow-lg rounded-xl p-6 text-center transition-transform transform hover:-translate-y-1"
+            className="bg-white border border-green-100 shadow-sm hover:shadow-xl rounded-2xl p-6 text-center transition-all duration-300 hover:-translate-y-1"
           >
-            <div className="flex justify-center items-center mb-4">
-              {reason.icon}
+            <div className="flex justify-center items-center mb-5">
+              <div className="bg-green-50 p-4 rounded-full shadow-inner group-hover:scale-110 transition-transform duration-300">
+                {reason.icon}
+              </div>
             </div>
-            <h3 className="text-lg font-semibold text-gray-800 mb-2">{reason.title}</h3>
-            <p className="text-gray-600 text-sm">{reason.desc}</p>
+            <h3 className="text-lg font-semibold text-green-700 mb-2">
+              {reason.title}
+            </h3>
+            <p className="text-gray-600 text-sm leading-relaxed">
+              {reason.desc}
+            </p>
           </div>
         ))}
       </div>
@@ -101,4 +161,3 @@ const WhyChooseUs = () => {
 };
 
 export default WhyChooseUs;
-
