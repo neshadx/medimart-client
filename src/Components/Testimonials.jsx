@@ -50,6 +50,57 @@
 
 
 
+// const testimonials = [
+//   {
+//     name: "Tanvir Hasan",
+//     review:
+//       "MediMart is the most reliable online pharmacy. Their delivery is super fast and all medicines are genuine.",
+//     image: "https://i.postimg.cc/tCHbk1V9/client.jpg",
+//   },
+//   {
+//     name: "Farzana Ahmed",
+//     review:
+//       "I’ve ordered multiple times and never been disappointed. Customer service is also excellent!",
+//     image: "https://i.postimg.cc/Qt08wjLf/Client.jpg",
+//   },
+//   {
+//     name: "Rafiq Islam",
+//     review:
+//       "Buying medicine has never been easier. Highly recommend MediMart to everyone!",
+//     image: "https://i.postimg.cc/Pxrhm0LY/client.png",
+//   },
+// ];
+
+// const Testimonials = () => {
+//   return (
+//     <section className="bg-gradient-to-b from-green-50 to-white py-16 px-4 md:px-12 rounded-xl my-20">
+//       <h2 className="text-3xl md:text-4xl font-bold text-center text-green-700 mb-12 flex justify-center items-center gap-2">
+//         <span className="text-green-600 text-4xl">💬</span> What Our Customers Say
+//       </h2>
+
+//       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+//         {testimonials.map((t, i) => (
+//           <div
+//             key={i}
+//             className="bg-white border border-green-100 rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-all duration-300"
+//           >
+//             <img
+//               src={t.image}
+//               alt={t.name}
+//               className="w-20 h-20 rounded-full mx-auto mb-4 object-cover shadow"
+//             />
+//             <h3 className="text-lg font-semibold mb-2 text-green-700">{t.name}</h3>
+//             <p className="text-gray-600 text-sm italic">“{t.review}”</p>
+//           </div>
+//         ))}
+//       </div>
+//     </section>
+//   );
+// };
+
+// export default Testimonials;
+
+
 const testimonials = [
   {
     name: "Tanvir Hasan",
@@ -73,24 +124,31 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <section className="bg-gradient-to-b from-green-50 to-white py-16 px-4 md:px-12 rounded-xl my-20">
-      <h2 className="text-3xl md:text-4xl font-bold text-center text-green-700 mb-12 flex justify-center items-center gap-2">
-        <span className="text-green-600 text-4xl">💬</span> What Our Customers Say
+    <section className="bg-gradient-to-b from-green-50 to-white py-16 px-4 md:px-12 rounded-2xl my-20">
+      {/* Section Title */}
+      <h2 className="text-3xl md:text-4xl font-extrabold text-center text-green-700 mb-14 flex justify-center items-center gap-2">
+        <span className="text-green-600 text-4xl">💬</span>
+        What Our Customers Say
       </h2>
 
+      {/* Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {testimonials.map((t, i) => (
           <div
             key={i}
-            className="bg-white border border-green-100 rounded-xl shadow-md p-6 text-center hover:shadow-lg transition-all duration-300"
+            className="bg-white border border-green-100 rounded-2xl shadow-sm p-6 text-center hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
           >
             <img
               src={t.image}
               alt={t.name}
-              className="w-20 h-20 rounded-full mx-auto mb-4 object-cover shadow"
+              className="w-20 h-20 rounded-full mx-auto mb-4 object-cover shadow-md ring-2 ring-green-100"
             />
-            <h3 className="text-lg font-semibold mb-2 text-green-700">{t.name}</h3>
-            <p className="text-gray-600 text-sm italic">“{t.review}”</p>
+            <h3 className="text-lg font-semibold mb-2 text-green-700">
+              {t.name}
+            </h3>
+            <p className="text-gray-600 text-sm italic leading-relaxed">
+              “{t.review}”
+            </p>
           </div>
         ))}
       </div>
@@ -99,3 +157,4 @@ const Testimonials = () => {
 };
 
 export default Testimonials;
+
